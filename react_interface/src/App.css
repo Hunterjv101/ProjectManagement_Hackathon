@@ -1,0 +1,6 @@
+.boxed {
+  width: 200px;
+  border: 1px black solid;
+  text-align: center;
+  vertical-align: center;
+}
