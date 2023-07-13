@@ -30,19 +30,15 @@ function App() {
 }
 function vaProj() {
   alert("Loading project list");
-  //projects.js
 }
 function maProj() {
   alert("Loading project modification page");
-  //modify.js
 }
 function aaProj() {
   alert("Loading new project input");
-  //add.js
 }
 function daProj() {
   alert("Loading project list to delete");
-  // delete.js
 }
 
 function Header(props) {
