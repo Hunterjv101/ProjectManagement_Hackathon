@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function del() {
+export default function Del() {
   return (
     <div id={"delete"}>
       <h4>Delete Page</h4>

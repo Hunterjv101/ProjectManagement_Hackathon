@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function modify() {
+export default function Modify() {
   return (
     <div id={"modify"}>
       <h4>Modify Page</h4>
