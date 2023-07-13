@@ -2,46 +2,73 @@ const mongodb = require("mongodb");
 const { MongoClient } = require("mongodb");
 
 const url = "mongodb://localhost:27017";
-const dbName = "bookdb";
-const collectionName = "books";
+const dbName = "project_managementdb";
 let collection;
+let db;
 
 async function startup() {
   let client = new MongoClient(url);
   await client.connect();
-  var db = client.db(dbName);
-  collection = db.collection(collectionName);
+  db = client.db(dbName);
 }
 startup();
 
-module.exports.findAllBooks = function (callback) {
+module.exports.getAllProjects = function (callback) {
+  let collection = db.collection("projects");
   let dataPromise = collection.find({}).toArray();
-  dataPromise.then((books) => callback(books));
+  dataPromise.then((projects) => callback(projects));
 };
 
-module.exports.findBook = function (isbn, callback) {
-  let dataPromise = collection.findOne({ isbn: isbn });
-  dataPromise.then((books) => callback(books));
+module.exports.getAllTasks = function (callback) {
+  let collection = db.collection("tasks");
+  let dataPromise = collection.find({}).toArray();
+  dataPromise.then((tasks) => callback(tasks));
 };
 
-module.exports.deleteBook = function (isbn, callback) {
-  let dataPromise = collection.deleteOne({ isbn: isbn });
-  dataPromise.then((ok) => callback(ok));
+// module.exports.findCharacter = function (id, callback) {
+//   let collection = db.collection("characters");
+//   let dataPromise = collection.findOne({ id: +id });
+//   dataPromise.then((character) => callback(character));
+// };
+
+// module.exports.findFilm = function (id, callback) {
+//   let collection = db.collection("films");
+//   let dataPromise = collection.findOne({ id: +id });
+//   dataPromise.then((film) => callback(film));
+// };
+
+// module.exports.findPlanet = function (id, callback) {
+//   let collection = db.collection("planets");
+//   let dataPromise = collection.findOne({ id: +id });
+//   dataPromise.then((planet) => callback(planet));
+// };
+
+// module.exports.findFilmCharacters = function (id, callback) {
+//   let collection = db.collection("filmsCharacters");
+//   let dataPromise = collection.find({ film_id: +id }).toArray();
+//   dataPromise.then((characters) => callback(characters));
+// };
+
+// module.exports.findFilmPlanets = function (id, callback) {
+//   let collection = db.collection("filmsPlanets");
+//   let dataPromise = collection.find({ film_id: +id }).toArray();
+//   dataPromise.then((planets) => callback(planets));
+// };
+
+module.exports.findCharacterFilms = function (id, callback) {
+  let collection = db.collection("filmsCharacters");
+  let dataPromise = collection.find({ character_id: +id }).toArray();
+  dataPromise.then((films) => callback(films));
 };
 
-module.exports.updateBook = function (isbn, book, callback) {
-  delete book._id;
-  let dataPromise = collection.updateOne(
-    { isbn: isbn },
-    { $set: book },
-    { upsert: true },
-    callback
-  );
-  dataPromise.then((ok) => callback(ok));
+module.exports.findPlanetFilms = function (id, callback) {
+  let collection = db.collection("filmsPlanets");
+  let dataPromise = collection.find({ planet_id: +id }).toArray();
+  dataPromise.then((planets) => callback(planets));
 };
 
-module.exports.addBook = function (book, callback) {
-  delete book._id;
-  let dataPromise = collection.insertOne(book);
-  dataPromise.then((ok) => callback(ok));
+module.exports.findPlanetCharacters = function (id, callback) {
+  let collection = db.collection("characters");
+  let dataPromise = collection.find({ homeworld: +id }).toArray();
+  dataPromise.then((planets) => callback(planets));
 };
