@@ -31,27 +31,19 @@ function Body() {
   return (
     <div>
       <Link to="./projects">
-        <button style={divStyle} onClick={vaProj}>
-          View All Projects
-        </button>
+        <button style={divStyle}>View All Projects</button>
       </Link>
       <br></br>
       <Link to="./add">
-        <button style={divStyle} onClick={aaProj}>
-          Add New Project
-        </button>
+        <button style={divStyle}>Add New Project</button>
       </Link>
       <br></br>
       <Link to="./modify">
-        <button style={divStyle} onClick={maProj}>
-          Modify a Project
-        </button>
+        <button style={divStyle}>Modify a Project</button>
       </Link>
       <br></br>
       <Link to="./delete">
-        <button style={divStyle} onClick={daProj}>
-          Delete a project
-        </button>
+        <button style={divStyle}>Delete a project</button>
       </Link>
     </div>
   );
