@@ -11,75 +11,65 @@ const divStyle = {
   textAlign: "center",
 };
 
-function vaProj() {
-    alert("Loading project list");
-  }
-  function maProj() {
-    alert("Loading project modification page");
-  }
-  function aaProj() {
-    alert("Loading new project input");
-  }
-  function daProj() {
-    alert("Loading project list to delete");
-  }
+// function vaProj() {
+//     alert("Loading project list");
+//   }
+//   function maProj() {
+//     alert("Loading project modification page");
+//   }
+//   function aaProj() {
+//     alert("Loading new project input");
+//   }
+//   function daProj() {
+//     alert("Loading project list to delete");
+//   }
 
 function Header(props) {
-    return <h3>{props.text}</h3>;
+  return <h3>{props.text}</h3>;
 }
 function Body() {
   return (
     <div>
-      <Link to='./projects'>
-        <button style={divStyle} onClick={vaProj}>
-            View All Projects
-        </button>
+      <Link to="./projects">
+        <button style={divStyle}>View All Projects</button>
       </Link>
       <br></br>
-      <Link to='./add'>
-        <button style={divStyle} onClick={aaProj}>
-            Add New Project
-        </button>
+      <Link to="./add">
+        <button style={divStyle}>Add New Project</button>
       </Link>
       <br></br>
-      <Link to='./modify'>
-        <button style={divStyle} onClick={maProj}>
-            Modify a Project
-        </button>
+      <Link to="./modify">
+        <button style={divStyle}>Modify a Project</button>
       </Link>
       <br></br>
-      <Link to='./delete'>
-        <button style={divStyle} onClick={daProj}>
-            Delete a project
-        </button>
+      <Link to="./delete">
+        <button style={divStyle}>Delete a project</button>
       </Link>
     </div>
   );
 }
 function Footer(props) {
-    return (
-      <div>
-        <h4>{props.text}</h4>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h4>{props.text}</h4>
+    </div>
+  );
+}
 
 export default function home() {
-
   return (
     <div
-        className={"boxed"}
-        style={{
+      className={"boxed"}
+      style={{
         position: "absolute",
         top: "50%",
         left: "42%",
         transform: "translate(0px, -50%)",
-        }}
+      }}
     >
-      <Header text={title}/>
+      <Header text={title} />
       <Body />
-      <Footer text={footerText}/>
-      
+      <Footer text={footerText} />
     </div>
   );
 }
