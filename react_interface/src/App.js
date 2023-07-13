@@ -1,35 +1,24 @@
 import logo from "./logo.svg";
 import "./App.css";
-
-const title = "Pretty Decent Project Management";
-
-function Header() {
-  return <h3>{title}</h3>;
-}
-function Body() {
-  return (
-    <div>
-      <p>View all projects</p>
-      <p>Modify existing project</p>
-      <p>add a project</p>
-      <p>delete a project</p>
-    </div>
-  );
-}
-function Footer() {
-  return (
-    <div>
-      <h4>Empty footer</h4>
-    </div>
-  );
-}
+import { Routes,Route } from "react-router-dom";
+import Projects from "./Pages/projects";
+import Add from "./Pages/add";
+import Del from "./Pages/delete";
+import Modify from "./Pages/modify";
+import Home from "./Pages/home";
 
 function App() {
   return (
     <div>
-      <Header />
-      <Body />
-      <Footer />
+      <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/projects" element={<Projects/>} />
+          <Route path="/add" element={<Add/>} />
+          <Route path="/delete" element={<Del/>} />
+          <Route path="/modify" element={<Modify/>} />
+      </Routes>
+
+      
     </div>
   );
 }
