@@ -6,14 +6,14 @@ import pandas as pd
 import numpy as np
 
 
-def db_client():
+def db_connection():
     
     try:
         client = MongoClient("localhost", 27017)
     except:
         print("Something went wrong, this is very useful exception raise!")
 
-    return db_client()
+    return client
     
 
 def main():
@@ -26,12 +26,12 @@ def main():
     task_df.create_task_samples()
 
     # Establish connection and put data into MongoDB
-    client = db_client()
+    client = db_connection()
     db = client.project_managementdb
 
-    db.projects.insert_many(project_df.to_dict())
-    db.tasks.insert_many(task_df.to_dict())
-
+    # Insert generated data into mongo collections named projects and tasks in the project...db
+    db.projects.insert_many(project_df.df.to_dict('records'))
+    db.tasks.insert_many(task_df.df.to_dict('records'))
 
 if __name__ == '__main__':
     main()
