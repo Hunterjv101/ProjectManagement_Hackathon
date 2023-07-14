@@ -37,7 +37,7 @@ export default function Projects(props) {
             <th>Budget</th>
             <th>Workload</th>
             <th>Total Experience in Years</th>
-            <th>Completion Time</th>
+            <th>Completion Time in Days</th>
           </tr>
         </thead>
         <tbody>

@@ -24,7 +24,7 @@ export default function Delete(props) {
           type="text"
           name="project_id"
           required="required"
-          placeholder="Enter a project ID to delete"
+          placeholder="Enter a project ID"
           onChange={(e) => {
             setProjectToDelete(e.target.value);
           }}
