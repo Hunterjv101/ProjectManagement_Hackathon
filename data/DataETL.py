@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import GenerateData
+import DataModule
 from pymongo import MongoClient
 import pandas as pd 
 import numpy as np
@@ -18,11 +18,11 @@ def db_connection():
 
 def main():
     # Create and generate project object and samples
-    project_df = GenerateData.ProjectDataFrame()
+    project_df = DataModule.ProjectDataFrame()
     project_df.create_project_samples()
 
     # Create and generate tasks object and samples
-    task_df = GenerateData.TaskDataFrame()
+    task_df = DataModule.TaskDataFrame()
     task_df.create_task_samples()
 
     # Establish connection and put data into MongoDB

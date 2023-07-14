@@ -8,8 +8,11 @@ import math
 from sklearn.linear_model import LinearRegression 
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
+import seaborn as sns
+import operator
+import matplotlib.pyplot as plt
 
-#TODO If time permits, change randomized to distribution to add seom trend to the data.
+#TODO Change randomized to some distribution to add a trend to the data.
 
 '''
 This script generates 1500 samples for project and tasks. The project
@@ -21,9 +24,6 @@ Not only this, but the ProjectDataFrame has methods for predicting data within t
 1. Create Dataframe
 2. Generate Samples
 3. Run run_and_evaluate_model
-
-
-NOTE: To get data into a database, just run the DataETL.py
 '''
 
 class ProjectDataFrame:
@@ -33,10 +33,11 @@ class ProjectDataFrame:
         # Assuming its csv for now because we generated the data
         if project_data_filepath is not None:
             self.df = pd.read_json(project_data_filepath)
-            self.predictors = []
+            self.predictors = [] # All variables starting out, specifically for eda
             self.target = []
+            self.predictors_dummy # After all the model methods are ran, an attribute called, this will store the variables used
             
-        self.seed = random.seed(random.randrange(1,1000000)) # Random seed just chose a number
+        self.seed = random.seed(random.randrange(1,10000)) # Random seed just chose a number
         self.df = None
 
     def __str__(self):
@@ -70,10 +71,18 @@ class ProjectDataFrame:
     def describe(self):
         return self.df.describe()
     
+    def get_eda_plots(self):
+        to_drop = ['project_id']
+        plot_df = self.df.drop(to_drop,axis=1)
+
+        # Plot the variables
+        sns.pairplot(plot_df)
+
+    
     def _prep_linear_regression(self):
         
         predictor_columns = self.df.columns.drop('completion_time_days')
-        predictors = [col for col in predictor_columns if 'id' not in col]
+        predictors = [col for col in predictor_columns if 'id' not in col]; self.predictors = predictors
         target = ["completion_time_days"]
 
         
@@ -87,7 +96,7 @@ class ProjectDataFrame:
         X_test_dummified = pd.get_dummies(X_test)
 
         # Save predictor dummy labels to class instance
-        self.predictors = X_train_dummified.columns.to_list()
+        self.predictors_dummy = X_train_dummified.columns.to_list()
     
         return (X_train_dummified,X_test_dummified,y_train,y_test)
 
@@ -113,10 +122,32 @@ class ProjectDataFrame:
         y_true, y_pred = self._run_linear_regression()
 
         r2 = metrics.r2_score(y_true,y_pred)
-        return metrics.r2_score(y_true,y_pred)
+        print(f'R2 Score: {metrics.r2_score(y_true,y_pred)}')
+    
+    def get_feature_importance(self):
+        
+        var_list = [var for var in self.predictors_dummy]
+        ceoff_list = [abs(coeff) for coeff in self.model_coeff]
+        to_sort = []
+
+        for var,coeff in zip(var_list,ceoff_list):
+            to_sort.append((var,coeff))
+        
+        sorted_list = sorted(to_sort,key=lambda ele: ele[1], reverse=True)
+        
+
+        # Generate plot of feature importance
+        test_df = pd.DataFrame(sorted_list, columns=['Feature','Ceofficient_Magnitude'])
+        fig, ax = plt.subplots()
+        sns.barplot(test_df,x = 'Feature', y = 'Ceofficient_Magnitude')
+        fig.set_size_inches(15,10)
+        plt.title("Feature Importance by Regression Coefficients")
+        plt.show()
 
 
 
+
+        
 class TaskDataFrame():
 
     def __init__(self, task_data_filepath = None):
@@ -152,7 +183,7 @@ class TaskDataFrame():
     def _generate_task_sample(self,id):
 
         task_dict = {
-        "project_id": random.randint(0,5),
+        "proeject_id": random.randint(0,5),
         "task_id": id,
         "status": random.choice(['Complete','In progress', 'Not complete']), # Update status from due_date in dataframe
         "person_assigned": str(self._generate_name()),
