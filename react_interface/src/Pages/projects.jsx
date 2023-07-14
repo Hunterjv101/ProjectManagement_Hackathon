@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./projects.css";
+import "./tables.css";
 
 function getProjects() {
   let myHeaders = new Headers({ "Content-Type": "application/json" });
@@ -22,6 +22,9 @@ export default function Projects() {
     });
   }, []);
 
+  let filterProjects = projects.slice(0, 6);
+  console.log(filterProjects);
+
   return (
     <div>
       <table>
@@ -36,15 +39,15 @@ export default function Projects() {
           </tr>
         </thead>
         <tbody>
-          {projects.map((project, index) => {
+          {filterProjects.map((project, index) => {
             return (
               <tr key={index}>
                 <td>{project.project_id}</td>
                 <td>{project.team_size}</td>
                 <td>{project.budget}</td>
-                <td>{project.worload}</td>
+                <td>{project.workload}</td>
                 <td>{project.cumulative_experience_years}</td>
-                <td>{project.completion_time}</td>
+                <td>{project.completion_time_days}</td>
               </tr>
             );
           })}
