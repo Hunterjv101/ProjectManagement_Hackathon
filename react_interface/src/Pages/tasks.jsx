@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./projects.css";
+import "./tables.css";
 
 function getTasks() {
   let myHeaders = new Headers({ "Content-Type": "application/json" });
@@ -10,7 +10,7 @@ function getTasks() {
   });
 }
 
-export default function Tasks() {
+export default function Tasks(props) {
   const [project_tasks, setTasks] = useState([]);
 
   useEffect(() => {
@@ -21,6 +21,11 @@ export default function Tasks() {
       setTasks(taskArray);
     });
   }, []);
+
+  let filterTasks = project_tasks.filter(
+    (task) => task.project_id === props.project
+  );
+  console.log(filterTasks);
 
   return (
     <div>
@@ -36,7 +41,7 @@ export default function Tasks() {
           </tr>
         </thead>
         <tbody>
-          {project_tasks.map((task, index) => {
+          {filterTasks.map((task, index) => {
             return (
               <tr key={index}>
                 <td>{task.project_id}</td>
