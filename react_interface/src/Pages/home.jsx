@@ -1,5 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
+import Tasks from "./tasks";
+import "./home.css";
 
 const title = "Pretty Decent Project Management";
 const footerText = "imagine travelers logo here";
@@ -11,26 +13,13 @@ const divStyle = {
   textAlign: "center",
 };
 
-// function vaProj() {
-//     alert("Loading project list");
-//   }
-//   function maProj() {
-//     alert("Loading project modification page");
-//   }
-//   function aaProj() {
-//     alert("Loading new project input");
-//   }
-//   function daProj() {
-//     alert("Loading project list to delete");
-//   }
-
 function Header(props) {
   return <h3>{props.text}</h3>;
 }
 function Body() {
   return (
-    <div>
-      <Link to="./projects">
+    <div className="container">
+      {/* <Link to="./projects">
         <button style={divStyle}>View All Projects</button>
       </Link>
       <br></br>
@@ -44,7 +33,14 @@ function Body() {
       <br></br>
       <Link to="./delete">
         <button style={divStyle}>Delete a project</button>
-      </Link>
+      </Link> */}
+      <div className="item">
+        <Tasks />
+      </div>
+      <br></br>
+      <div className="item">
+        <Tasks />
+      </div>
     </div>
   );
 }
@@ -56,17 +52,9 @@ function Footer(props) {
   );
 }
 
-export default function home() {
+export default function Home() {
   return (
-    <div
-      className={"boxed"}
-      style={{
-        position: "absolute",
-        top: "50%",
-        left: "42%",
-        transform: "translate(0px, -50%)",
-      }}
-    >
+    <div>
       <Header text={title} />
       <Body />
       <Footer text={footerText} />

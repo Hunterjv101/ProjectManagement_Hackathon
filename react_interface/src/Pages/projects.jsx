@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import "./projects.css";
 //import data from mongo
-const data = "";
+//const data = "";
 
-export default function projects() {
-  //const [data, setData] =  usesState(py_data);
+export default function Projects() {
+  //const [data, setData] =  useState(py_data);
   // const projects = () => {
   return (
     <div className="app-container">
