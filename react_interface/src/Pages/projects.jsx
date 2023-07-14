@@ -22,7 +22,8 @@ export default function Projects(props) {
     });
   }, []);
 
-  let filterProjects = projects.slice(0, 6);
+  //let filterProjects = projects.slice(0, 6);
+  let filterProjects = projects.filter((proj) => proj.project_id < 6);
 
   function handleClick(id) {
     props.setProject(id);
