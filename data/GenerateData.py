@@ -9,7 +9,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
 
-#TODO Change randomized to distribution to add seom trend to the data.
+#TODO If time permits, change randomized to distribution to add seom trend to the data.
 
 '''
 This script generates 1500 samples for project and tasks. The project
@@ -21,6 +21,9 @@ Not only this, but the ProjectDataFrame has methods for predicting data within t
 1. Create Dataframe
 2. Generate Samples
 3. Run run_and_evaluate_model
+
+
+NOTE: To get data into a database, just run the DataETL.py
 '''
 
 class ProjectDataFrame:
@@ -33,7 +36,7 @@ class ProjectDataFrame:
             self.predictors = []
             self.target = []
             
-        self.seed = random.seed(random.randrange(1,1000)) # Random seed just chose a number
+        self.seed = random.seed(random.randrange(1,1000000)) # Random seed just chose a number
         self.df = None
 
     def __str__(self):
@@ -149,6 +152,7 @@ class TaskDataFrame():
     def _generate_task_sample(self,id):
 
         task_dict = {
+        "project_id": random.randint(0,5),
         "task_id": id,
         "status": random.choice(['Complete','In progress', 'Not complete']), # Update status from due_date in dataframe
         "person_assigned": str(self._generate_name()),
@@ -160,5 +164,5 @@ class TaskDataFrame():
         return task_dict
     
     def create_task_samples(self):
-        records = [self._generate_task_sample(i) for i in range(1500)]
+        records = [self._generate_task_sample(i) for i in range(100)]
         self.df = pd.DataFrame(records)

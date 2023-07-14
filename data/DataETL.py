@@ -31,7 +31,7 @@ def main():
 
     # Insert generated data into mongo collections named projects and tasks in the project...db
     db.projects.insert_many(project_df.df.to_dict('records'))
-    db.tasks.insert_many(task_df.df.to_dict('records'))
+    db.project_tasks.insert_many(task_df.df.to_dict('records'))
 
 if __name__ == '__main__':
     main()
