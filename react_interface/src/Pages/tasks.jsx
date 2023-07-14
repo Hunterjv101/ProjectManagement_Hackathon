@@ -12,6 +12,7 @@ function getTasks() {
 
 export default function Tasks() {
   const [project_tasks, setTasks] = useState([]);
+  const [project, setProject] = useState(0);
 
   useEffect(() => {
     let promise = getTasks();
@@ -21,6 +22,9 @@ export default function Tasks() {
       setTasks(taskArray);
     });
   }, []);
+
+  let filterTasks = project_tasks.filter((task) => task.project_id === project);
+  console.log(filterTasks);
 
   return (
     <div>
@@ -36,7 +40,7 @@ export default function Tasks() {
           </tr>
         </thead>
         <tbody>
-          {project_tasks.map((task, index) => {
+          {filterTasks.map((task, index) => {
             return (
               <tr key={index}>
                 <td>{task.project_id}</td>
