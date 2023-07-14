@@ -16,7 +16,7 @@ app.get("/projects", (req, res) => {
   });
 });
 
-app.get("/tasks", (req, res) => {
+app.get("/project_tasks", (req, res) => {
   dao.getAllTasks(function (data) {
     res.send(data);
   });

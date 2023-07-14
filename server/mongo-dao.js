@@ -20,7 +20,7 @@ module.exports.getAllProjects = function (callback) {
 };
 
 module.exports.getAllTasks = function (callback) {
-  let collection = db.collection("tasks");
+  let collection = db.collection("project_tasks");
   let dataPromise = collection.find({}).toArray();
   dataPromise.then((tasks) => callback(tasks));
 };

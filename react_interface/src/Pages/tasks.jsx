@@ -4,14 +4,14 @@ import "./projects.css";
 function getTasks() {
   let myHeaders = new Headers({ "Content-Type": "application/json" });
   var myInit = { method: "GET", headers: myHeaders, mode: "cors" };
-  let promise = fetch("/tasks", myInit);
+  let promise = fetch("/project_tasks", myInit);
   return promise.then((response) => {
     return response.text();
   });
 }
 
 export default function Tasks() {
-  const [tasks, setTasks] = useState([]);
+  const [project_tasks, setTasks] = useState([]);
 
   useEffect(() => {
     let promise = getTasks();
@@ -23,10 +23,11 @@ export default function Tasks() {
   }, []);
 
   return (
-    <div id={"add"}>
+    <div>
       <table>
         <thead>
           <tr>
+            <th>Project id</th>
             <th>Task id</th>
             <th>Status</th>
             <th>Person Assigned</th>
@@ -35,9 +36,10 @@ export default function Tasks() {
           </tr>
         </thead>
         <tbody>
-          {tasks.map((task, index) => {
+          {project_tasks.map((task, index) => {
             return (
               <tr key={index}>
+                <td>{task.project_id}</td>
                 <td>{task.task_id}</td>
                 <td>{task.status}</td>
                 <td>{task.person_assigned}</td>
