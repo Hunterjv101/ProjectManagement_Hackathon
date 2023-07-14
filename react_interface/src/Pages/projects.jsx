@@ -10,7 +10,7 @@ function getProjects() {
   });
 }
 
-export default function Projects() {
+export default function Projects(props) {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
@@ -23,7 +23,10 @@ export default function Projects() {
   }, []);
 
   let filterProjects = projects.slice(0, 6);
-  console.log(filterProjects);
+
+  function handleClick(id) {
+    props.setProject(id);
+  }
 
   return (
     <div>
@@ -41,7 +44,7 @@ export default function Projects() {
         <tbody>
           {filterProjects.map((project, index) => {
             return (
-              <tr key={index}>
+              <tr key={index} onClick={() => handleClick(project.project_id)}>
                 <td>{project.project_id}</td>
                 <td>{project.team_size}</td>
                 <td>{project.budget}</td>

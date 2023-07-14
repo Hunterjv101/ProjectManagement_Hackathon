@@ -10,9 +10,8 @@ function getTasks() {
   });
 }
 
-export default function Tasks() {
+export default function Tasks(props) {
   const [project_tasks, setTasks] = useState([]);
-  const [project, setProject] = useState(0);
 
   useEffect(() => {
     let promise = getTasks();
@@ -23,7 +22,9 @@ export default function Tasks() {
     });
   }, []);
 
-  let filterTasks = project_tasks.filter((task) => task.project_id === project);
+  let filterTasks = project_tasks.filter(
+    (task) => task.project_id === props.project
+  );
   console.log(filterTasks);
 
   return (

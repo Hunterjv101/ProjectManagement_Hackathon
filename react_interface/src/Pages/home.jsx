@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 //import { Link } from "react-router-dom";
 import Tasks from "./tasks";
 import "./home.css";
@@ -18,14 +18,15 @@ function Header(props) {
   return <h3>{props.text}</h3>;
 }
 function Body() {
+  const [project, setProject] = useState(0);
   return (
     <div className="container">
       <div className="item">
-        <Projects />
+        <Projects project={project} setProject={setProject} />
       </div>
       <br></br>
       <div className="item">
-        <Tasks />
+        <Tasks project={project} />
       </div>
     </div>
   );
