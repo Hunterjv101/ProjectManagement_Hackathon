@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 //import { Link } from "react-router-dom";
 import Tasks from "./tasks";
 import "./home.css";
 import Projects from "./projects";
+import Delete from "./delete";
 
 const title = "Pretty Decent Project Management";
 const footerText = "imagine travelers logo here";
@@ -18,14 +19,25 @@ function Header(props) {
   return <h3>{props.text}</h3>;
 }
 function Body() {
+  const [projects, setProjects] = useState([]);
+  const [project, setProject] = usestate(0);
   return (
     <div className="container">
       <div className="item">
-        <Projects />
+        <Delete projects={projects} setProjects={setProjects} />
       </div>
       <br></br>
       <div className="item">
-        <Tasks />
+        <Projects
+          projects={projects}
+          project={project}
+          setProject={setProject}
+          setProjects={setProjects}
+        />
+      </div>
+      <br></br>
+      <div className="item">
+        <Tasks project={project} />
       </div>
     </div>
   );

@@ -10,17 +10,21 @@ function getProjects() {
   });
 }
 
-export default function Projects() {
-  const [projects, setProjects] = useState([]);
-
+export default function Projects(props) {
   useEffect(() => {
     let promise = getProjects();
 
     promise.then((text) => {
       let projectArray = JSON.parse(text);
-      setProjects(projectArray);
+      props.setProjects(projectArray);
     });
   }, []);
+
+  let filterProjects = props.projects.filter((proj) => proj.project_id < 6);
+
+  function handleClick(id) {
+    props.setProject(id);
+  }
 
   return (
     <div>
@@ -36,9 +40,9 @@ export default function Projects() {
           </tr>
         </thead>
         <tbody>
-          {projects.map((project, index) => {
+          {filterProjects.map((project, index) => {
             return (
-              <tr key={index}>
+              <tr key={index} onClick={() => handleClick(project.project_id)}>
                 <td>{project.project_id}</td>
                 <td>{project.team_size}</td>
                 <td>{project.budget}</td>
@@ -57,7 +61,7 @@ export default function Projects() {
 // import React, { useState, useEffect } from "react";
 // import "./projects.css";
 
-// export function deleteBook(ID) {
+// export function deleteProject(ID) {
 //   let myHeaders = new Headers({ "Content-Type": "application/json" });
 //   var myInit = { method: "DELETE", headers: myHeaders, mode: "cors" };
 //   let promise = fetch("/projects", myInit);

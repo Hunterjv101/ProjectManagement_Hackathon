@@ -24,3 +24,10 @@ module.exports.getAllTasks = function (callback) {
   let dataPromise = collection.find({}).toArray();
   dataPromise.then((tasks) => callback(tasks));
 };
+
+module.exports.deleteProject = function (project_id, callback) {
+  let collection = db.collection("projects");
+  console.log(project_id);
+  let dataPromise = collection.deleteOne({ project_id: parseInt(project_id) });
+  dataPromise.then((ok) => callback(ok));
+};

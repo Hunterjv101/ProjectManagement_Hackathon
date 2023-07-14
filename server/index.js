@@ -21,3 +21,15 @@ app.get("/project_tasks", (req, res) => {
     res.send(data);
   });
 });
+
+app.delete("/projects/:ID", (req, res) => {
+  dao.deleteProject(req.params.ID, function (data) {
+    (ok) => {
+      if (!ok) {
+        res.status(404).end();
+      } else {
+        res.end();
+      }
+    };
+  });
+});
