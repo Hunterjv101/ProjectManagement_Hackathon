@@ -25,7 +25,6 @@ export default function Tasks(props) {
   let filterTasks = project_tasks.filter(
     (task) => task.project_id === props.project
   );
-  console.log(filterTasks);
 
   return (
     <div>

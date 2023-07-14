@@ -20,7 +20,7 @@ function Header(props) {
 }
 function Body() {
   const [projects, setProjects] = useState([]);
-  const [project, setProject] = usestate(0);
+  const [project, setProject] = useState(0);
   return (
     <div className="container">
       <div className="item">

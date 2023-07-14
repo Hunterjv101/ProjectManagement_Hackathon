@@ -21,6 +21,7 @@ export default function Projects(props) {
   }, []);
 
   let filterProjects = props.projects.filter((proj) => proj.project_id < 6);
+  console.log(props.projects);
 
   function handleClick(id) {
     props.setProject(id);
@@ -35,7 +36,7 @@ export default function Projects(props) {
             <th>Team Size</th>
             <th>Budget</th>
             <th>Workload</th>
-            <th>Total Experience(yrs)</th>
+            <th>Total Experience in Years</th>
             <th>Completion Time</th>
           </tr>
         </thead>
