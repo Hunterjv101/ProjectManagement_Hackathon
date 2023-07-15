@@ -31,3 +31,17 @@ module.exports.deleteProject = function (project_id, callback) {
   let dataPromise = collection.deleteOne({ project_id: parseInt(project_id) });
   dataPromise.then((ok) => callback(ok));
 };
+
+module.exports.addProject = function (newFormData, callback) {
+  let collection = db.collection("projects");
+  console.log(newFormData); // Check if the data received from the client is correct
+  collection.insertOne(newFormData, (err, result) => {
+    if (err) {
+      console.error("Error inserting document:", err);
+      callback(false);
+    } else {
+      console.log("Successfully inserted document:", result.insertedId);
+      callback(true);
+    }
+  });
+};

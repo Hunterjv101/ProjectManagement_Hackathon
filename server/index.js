@@ -33,3 +33,13 @@ app.delete("/projects/:ID", (req, res) => {
     };
   });
 });
+
+app.post("/projects", (req, res) => {
+  dao.addProject(req.body, (ok) => {
+    if (!ok) {
+      res.status(500).end();
+    } else {
+      res.end();
+    }
+  });
+});

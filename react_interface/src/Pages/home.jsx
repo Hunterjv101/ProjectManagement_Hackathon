@@ -4,6 +4,7 @@ import Tasks from "./tasks";
 import "./home.css";
 import Projects from "./projects";
 import Delete from "./delete";
+import Add from "./add";
 
 const title = "Pretty Decent Project Management";
 const footerText = "imagine travelers logo here";
@@ -25,6 +26,10 @@ function Body() {
     <div className="container">
       <div className="item">
         <Delete projects={projects} setProjects={setProjects} />
+      </div>
+      <br></br>
+      <div className="item">
+        <Add projects={projects} setProjects={setProjects} />
       </div>
       <br></br>
       <div className="item">

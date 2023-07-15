@@ -183,7 +183,7 @@ class TaskDataFrame():
     def _generate_task_sample(self,id):
 
         task_dict = {
-        "proeject_id": random.randint(0,5),
+        "project_id": random.randint(0,5),
         "task_id": id,
         "status": random.choice(['Complete','In progress', 'Not complete']), # Update status from due_date in dataframe
         "person_assigned": str(self._generate_name()),

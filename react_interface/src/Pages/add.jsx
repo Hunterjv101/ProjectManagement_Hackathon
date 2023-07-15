@@ -1,72 +1,129 @@
-export default function addProject() {
-     const handleAddFormChange = (event) => {
-          event.preventDefault();
+import React, { useState } from "react";
 
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
-    const newFormData = { ...addFormData };
-    newFormData[fieldName] = fieldValue;
-
-    setAddFormData(newFormData);
+async function addProjectToServer(newProjectData) {
+  const myHeaders = new Headers({ "Content-Type": "application/json" });
+  const myInit = {
+    method: "POST",
+    headers: myHeaders,
+    mode: "cors",
+    body: JSON.stringify(newProjectData),
   };
+  const response = await fetch("/projects", myInit);
+  return response.json();
+}
+
+export default function AddProject(props) {
+  const [addFormData, setAddFormData] = useState({
+    project_id: "",
+    team_size: "",
+    budget: "",
+    workload: "",
+    cumulative_experience_years: "",
+    completion_time_days: "",
+  });
+
+  const handleAddFormChange = (event) => {
+    const fieldName = event.target.name;
+    const fieldValue = event.target.value;
+    setAddFormData((prevState) => ({
+      ...prevState,
+      [fieldName]: fieldValue,
+    }));
+  };
+
+  const handleSaveProject = async (event) => {
+    event.preventDefault();
+
+    const newProject = {
+      project_id: parseInt(addFormData.project_id),
+      team_size: parseInt(addFormData.team_size),
+      budget: parseInt(addFormData.budget),
+      workload: addFormData.workload,
+      cumulative_experience_years: parseInt(
+        addFormData.cumulative_experience_years
+      ),
+      completion_time_days: parseInt(addFormData.completion_time_days),
+    };
+
+    const updatedProjectsList = await addProjectToServer(newProject);
+
+    if (updatedProjectsList) {
+      props.setProjects(updatedProjectsList); // Update the projects list in the parent component (Home)
+      setAddFormData({
+        project_id: "",
+        team_size: "",
+        budget: "",
+        workload: "",
+        cumulative_experience_years: "",
+        completion_time_days: "",
+      });
+    } else {
+      console.log("Error: Failed to add project to the server.");
+    }
+  };
+
   return (
     <div>
-      <h2>Input new project</h2>
+      <h4>Input new project</h4>
       <form>
         <input
           type="text"
           name="project_id"
-          required="required"
+          required
           placeholder="Enter Project ID"
-          onchange={handleAddFormChange}
+          onChange={handleAddFormChange}
+          value={addFormData.project_id}
         />
         <br />
         <input
           type="text"
           name="team_size"
-          required="required"
+          required
           placeholder="Enter Team Size"
-          onchange={handleAddFormChange}
+          onChange={handleAddFormChange}
+          value={addFormData.team_size}
         />
         <br />
         <input
           type="text"
           name="budget"
-          required="required"
+          required
           placeholder="Enter Budget"
-          onchange={handleAddFormChange}
+          onChange={handleAddFormChange}
+          value={addFormData.budget}
         />
         <br />
         <input
           type="text"
           name="workload"
-          required="required"
+          required
           placeholder="Enter workload"
-          onchange={handleAddFormChange}
+          onChange={handleAddFormChange}
+          value={addFormData.workload}
         />
         <br />
         <input
           type="text"
           name="cumulative_experience_years"
-          required="required"
+          required
           placeholder="Enter Total Experience years"
-          onchange={handleAddFormChange}
+          onChange={handleAddFormChange}
+          value={addFormData.cumulative_experience_years}
         />
         <br />
         <input
           type="text"
-          name="completion_time"
-          required="required"
+          name="completion_time_days"
+          required
           placeholder="Enter Estimated Completion Time"
-          onchange={handleAddFormChange}
+          onChange={handleAddFormChange}
+          value={addFormData.completion_time_days}
         />
         <br />
-        {/* <button type="submit"> onClick{()=>handleSaveBook()}Add</button> */}
-        <button
-          type={"sumbit"}
-          value="Save"
-          onClick={() => handleSaveProject()}
-        />
+
+        <button type="submit" value="Save" onClick={handleSaveProject}>
+          Save
+        </button>
       </form>
     </div>
   );
