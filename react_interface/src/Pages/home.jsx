@@ -29,13 +29,15 @@ function Body() {
   return (
     <div className="container">
       <div>
-        <div className="item">
-          <Delete projects={projects} setProjects={setProjects} />
+        <div className="delete-container">
+          <div className="delete-item">
+            <Delete projects={projects} setProjects={setProjects} />
+          </div>
+          <div className="delete-item">
+            <DeleteTask tasks={tasks} setTasks={setTasks} />
+          </div>
         </div>
-        <div className="item">
-          <DeleteTask tasks={tasks} setTasks={setTasks} />
-        </div>
-        <br></br>
+
         <div className="item">
           <Add projects={projects} setProjects={setProjects} />
         </div>
@@ -44,8 +46,6 @@ function Body() {
           <AddTask tasks={tasks} setTasks={setTasks} />
         </div>
         <br></br>
-      </div>
-      <div>
         <div className="item">
           <Projects
             projects={projects}
@@ -54,6 +54,8 @@ function Body() {
             setProjects={setProjects}
           />
         </div>
+      </div>
+      <div>
         <br></br>
 
         <div className="item">

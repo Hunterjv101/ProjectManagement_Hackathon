@@ -18,7 +18,7 @@ export default function Delete(props) {
   }
   return (
     <div id="delete-proj">
-      <h4>Delete project</h4>
+      <h4>Delete Project</h4>
       <form>
         <input
           type="text"

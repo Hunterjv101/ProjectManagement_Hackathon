@@ -62,7 +62,7 @@ export default function AddTask(props) {
 
   return (
     <div>
-      <h4>Input new task</h4>
+      <h4>Add or Edit a task</h4>
       <form>
         <input
           style={{ width: "100px" }}
@@ -125,7 +125,12 @@ export default function AddTask(props) {
         />
         <br />
 
-        <button type="submit" value="Save" onClick={handleSaveTask}>
+        <button
+          type="submit"
+          value="Save"
+          onClick={handleSaveTask}
+          style={{ marginRight: "50px" }}
+        >
           Save
         </button>
       </form>

@@ -64,7 +64,7 @@ export default function AddProject(props) {
 
   return (
     <div>
-      <h4>Input new project</h4>
+      <h4>Add or Edit a Project</h4>
       <form>
         <input
           style={{ width: "100px" }}
@@ -127,7 +127,12 @@ export default function AddProject(props) {
         />
         <br />
 
-        <button type="submit" value="Save" onClick={handleSaveProject}>
+        <button
+          type="submit"
+          value="Save"
+          onClick={handleSaveProject}
+          style={{ marginRight: "50px" }}
+        >
           Save
         </button>
       </form>

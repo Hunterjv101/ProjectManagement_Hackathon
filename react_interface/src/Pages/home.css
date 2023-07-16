@@ -6,3 +6,11 @@
   padding: 1rem;
   width: "90%";
 }
+.delete-container {
+  display: flex;
+}
+
+.delete-item {
+  margin-right: 100px; /* Add some spacing between the components */
+  margin-left: 100px;
+}
