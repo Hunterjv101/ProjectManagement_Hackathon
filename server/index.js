@@ -33,9 +33,30 @@ app.delete("/projects/:ID", (req, res) => {
     };
   });
 });
+app.delete("/project_tasks/:ID", (req, res) => {
+  dao.deleteTask(req.params.ID, function (data) {
+    (ok) => {
+      if (!ok) {
+        res.status(404, req.params.ID).end();
+      } else {
+        res.end();
+      }
+    };
+  });
+});
 
 app.post("/projects", (req, res) => {
   dao.addProject(req.body, (ok) => {
+    if (!ok) {
+      res.status(500).end();
+    } else {
+      res.end();
+    }
+  });
+});
+
+app.post("/project_tasks", (req, res) => {
+  dao.addTask(req.body, (ok) => {
     if (!ok) {
       res.status(500).end();
     } else {

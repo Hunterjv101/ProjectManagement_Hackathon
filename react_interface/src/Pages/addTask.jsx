@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 
-async function addProjectToServer(newProjectData) {
+async function addTaskToServer(newTaskData) {
   const myHeaders = new Headers({ "Content-Type": "application/json" });
   const myInit = {
     method: "POST",
     headers: myHeaders,
     mode: "cors",
-    body: JSON.stringify(newProjectData),
+    body: JSON.stringify(newTaskData),
   };
-  const response = await fetch("/projects", myInit);
+  const response = await fetch("/project_tasks", myInit);
   return response.json();
 }
 
-export default function AddProject(props) {
+export default function AddTask(props) {
   const [addFormData, setAddFormData] = useState({
     project_id: "",
-    team_size: "",
-    budget: "",
-    workload: "",
-    cumulative_experience_years: "",
-    completion_time_days: "",
+    task_id: "",
+    status: "",
+    person_assigned: "",
+    due_date: "",
+    estimated_duration_days: "",
   });
 
   const handleAddFormChange = (event) => {
@@ -31,40 +31,38 @@ export default function AddProject(props) {
     }));
   };
 
-  const handleSaveProject = async (event) => {
+  const handleSaveTask = async (event) => {
     event.preventDefault();
 
-    const newProject = {
+    const newTask = {
       project_id: parseInt(addFormData.project_id),
-      team_size: parseInt(addFormData.team_size),
-      budget: parseInt(addFormData.budget),
-      workload: addFormData.workload,
-      cumulative_experience_years: parseInt(
-        addFormData.cumulative_experience_years
-      ),
-      completion_time_days: parseInt(addFormData.completion_time_days),
+      task_id: parseInt(addFormData.task_id),
+      status: parseInt(addFormData.status),
+      person_assigned: addFormData.person_assigned,
+      due_date: parseInt(addFormData.due_date),
+      estimated_duration_days: parseInt(addFormData.estimated_duration_days),
     };
 
-    const updatedProjectsList = await addProjectToServer(newProject);
+    const updatedTaskList = await addTaskToServer(newTask);
 
-    if (updatedProjectsList) {
-      props.setProjects(updatedProjectsList);
+    if (updatedTaskList) {
+      props.setTasks(updatedTaskList);
       setAddFormData({
         project_id: "",
-        team_size: "",
-        budget: "",
-        workload: "",
-        cumulative_experience_years: "",
-        completion_time_days: "",
+        task_id: "",
+        status: "",
+        person_assigned: "",
+        due_date: "",
+        estimated_duration_days: "",
       });
     } else {
-      console.log("Error: Failed to add project to the server.");
+      console.log("Error: Failed to add task to the server.");
     }
   };
 
   return (
     <div>
-      <h4>Input new project</h4>
+      <h4>Input new task</h4>
       <form>
         <input
           style={{ width: "100px" }}
@@ -79,55 +77,55 @@ export default function AddProject(props) {
         <input
           style={{ width: "100px" }}
           type="text"
-          name="team_size"
+          name="task_id"
           required
-          placeholder="Team Size"
+          placeholder="Task id"
           onChange={handleAddFormChange}
-          value={addFormData.team_size}
+          value={addFormData.task_id}
         />
         <br />
         <input
           style={{ width: "100px" }}
           type="text"
-          name="budget"
+          name="status"
           required
-          placeholder="Budget"
+          placeholder="Status"
           onChange={handleAddFormChange}
-          value={addFormData.budget}
+          value={addFormData.status}
         />
         <br />
         <input
           style={{ width: "150px" }}
           type="text"
-          name="workload"
+          name="person_assigned"
           required
-          placeholder="Workload"
+          placeholder="Person Assigned"
           onChange={handleAddFormChange}
-          value={addFormData.workload}
+          value={addFormData.person_assigned}
         />
         <br />
         <input
           style={{ width: "150px" }}
           type="text"
-          name="cumulative_experience_years"
+          name="due_date"
           required
           placeholder="Total Experience"
           onChange={handleAddFormChange}
-          value={addFormData.cumulative_experience_years}
+          value={addFormData.due_date}
         />
         <br />
         <input
           style={{ width: "150px" }}
           type="text"
-          name="completion_time_days"
+          name="estimated_duration_days"
           required
           placeholder="Est. Completion Time"
           onChange={handleAddFormChange}
-          value={addFormData.completion_time_days}
+          value={addFormData.estimated_duration_days}
         />
         <br />
 
-        <button type="submit" value="Save" onClick={handleSaveProject}>
+        <button type="submit" value="Save" onClick={handleSaveTask}>
           Save
         </button>
       </form>
