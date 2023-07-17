@@ -32,7 +32,7 @@ export default function Projects(props) {
       <table style={{ width: "95%" }}>
         <thead>
           <tr>
-            <th>Project id</th>
+            <th>Project ID</th>
             <th>Team Size</th>
             <th>Budget</th>
             <th>Workload</th>

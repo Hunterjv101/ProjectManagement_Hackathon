@@ -79,7 +79,7 @@ export default function AddTask(props) {
           type="text"
           name="task_id"
           required
-          placeholder="Task id"
+          placeholder="Task ID"
           onChange={handleAddFormChange}
           value={addFormData.task_id}
         />

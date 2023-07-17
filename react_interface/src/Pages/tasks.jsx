@@ -31,8 +31,8 @@ export default function Tasks(props) {
       <table>
         <thead>
           <tr>
-            <th>Project id</th>
-            <th>Task id</th>
+            <th>Project ID</th>
+            <th>Task ID</th>
             <th>Status</th>
             <th>Person Assigned</th>
             <th>Due Date</th>

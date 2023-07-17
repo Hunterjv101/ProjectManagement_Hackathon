@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-//import { Link } from "react-router-dom";
 import Tasks from "./tasks";
 import "./home.css";
 import Projects from "./projects";
@@ -10,17 +9,11 @@ import AddTask from "./addTask";
 
 const title = "Pretty Decent Project Management";
 const footerText = "imagine travelers logo here";
-// const divStyle = {
-//   backgroundColor: "#FB5050",
-//   border: "1px black solid",
-//   margin: "10px",
-//   padding: "5px",
-//   textAlign: "center",
-// };
 
 function Header(props) {
-  return <h3>{props.text}</h3>;
+  return <h3 style={{ marginLeft: "5px" }}>{props.text}</h3>;
 }
+
 function Body() {
   const [projects, setProjects] = useState([]);
   const [project, setProject] = useState(0);
@@ -66,11 +59,7 @@ function Body() {
   );
 }
 function Footer(props) {
-  return (
-    <div>
-      <h4>{props.text}</h4>
-    </div>
-  );
+  return <div></div>;
 }
 
 export default function Home() {
