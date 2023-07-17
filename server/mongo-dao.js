@@ -53,14 +53,15 @@ module.exports.addProject = function (newFormData, callback) {
 };
 module.exports.addTask = function (newFormData, callback) {
   let collection = db.collection("project_tasks");
-  console.log(newFormData); // Check if the data received from the client is correct
-  collection.insertOne(newFormData, (err, result) => {
-    if (err) {
-      console.error("Error inserting document:", err);
-      callback(false);
-    } else {
-      console.log("Successfully inserted document:", result.insertedId);
-      callback(true);
-    }
-  });
+  collection.deleteMany({ task_id: newFormData.task_id }).then(
+    collection.insertOne(newFormData, (err, result) => {
+      if (err) {
+        console.error("Error inserting document:", err);
+        callback(false);
+      } else {
+        console.log("Successfully inserted document:", result.insertedId);
+        callback(true);
+      }
+    })
+  );
 };
