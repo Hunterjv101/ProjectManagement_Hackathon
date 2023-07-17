@@ -37,7 +37,7 @@ export default function AddTask(props) {
     const newTask = {
       project_id: parseInt(addFormData.project_id),
       task_id: parseInt(addFormData.task_id),
-      status: parseInt(addFormData.status),
+      status: addFormData.status,
       person_assigned: addFormData.person_assigned,
       due_date: parseInt(addFormData.due_date),
       estimated_duration_days: parseInt(addFormData.estimated_duration_days),
