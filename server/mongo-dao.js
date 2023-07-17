@@ -41,7 +41,7 @@ module.exports.deleteTask = function (task_id, callback) {
 module.exports.addProject = function (newFormData, callback) {
   let collection = db.collection("projects");
   console.log(newFormData); // Check if the data received from the client is correct
-  collection.insertOne(newFormData, (err, result) => {
+  collection.update(newFormData, (err, result) => {
     if (err) {
       console.error("Error inserting document:", err);
       callback(false);

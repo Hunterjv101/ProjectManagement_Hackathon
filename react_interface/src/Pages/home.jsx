@@ -7,11 +7,15 @@ import Add from "./add";
 import DeleteTask from "./deleteTask";
 import AddTask from "./addTask";
 
-const title = "Pretty Decent Project Management";
+const title = "PDPM: Pretty Decent Project Manager";
 const footerText = "imagine travelers logo here";
 
 function Header(props) {
-  return <h3 style={{ marginLeft: "5px" }}>{props.text}</h3>;
+  return (
+    <header>
+      <h3 className="h3">{props.text}</h3>
+    </header>
+  );
 }
 
 function Body() {
@@ -36,7 +40,12 @@ function Body() {
         </div>
         <br></br>
         <div className="item">
-          <AddTask tasks={tasks} setTasks={setTasks} />
+          <AddTask
+            tasks={tasks}
+            task={task}
+            setTasks={setTasks}
+            setTask={setTask}
+          />
         </div>
         <br></br>
         <div className="item">

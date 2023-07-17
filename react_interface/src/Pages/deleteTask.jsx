@@ -30,7 +30,9 @@ export default function DeleteTask(props) {
         <input
           type={"button"}
           value="Delete"
-          onClick={() => deleteTask(taskToDelete)}
+          onClick={() => {
+            deleteTask(taskToDelete);
+          }}
         />
       </form>
     </div>
